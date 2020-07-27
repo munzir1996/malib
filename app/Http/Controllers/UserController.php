@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,21 +27,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed'
-        ]);
+
+        $request->validated();
 
         User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'alt_phone' => $request->alt_phone,
+            'address' => $request->address,
+            'balance' => $request->balance,
             'password' => Hash::make($request->password),
         ]);
 
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'User created successfully'
+            'message' => 'تم أضافة المستخدم'
         ]);
 
         return redirect()->route('users.index');
@@ -53,11 +56,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|min:8|confirmed'
-        ]);
+        $data = $request->validated();
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($data['password']);
@@ -67,7 +66,7 @@ class UserController extends Controller
 
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'User updated successfully'
+            'message' => 'تم تعديل المستخدم'
         ]);
 
         return redirect()->route('users.index');
@@ -77,5 +76,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return redirect()->route('users.index');
+        session()->flash('toast', [
+            'type' => 'success',
+            'message' => 'تم حذف المستخدم'
+        ]);
     }
 }
