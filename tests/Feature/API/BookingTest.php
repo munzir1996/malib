@@ -8,6 +8,7 @@ use App\Pitch;
 use App\PitchSchedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class BookingTest extends TestCase
@@ -38,7 +39,7 @@ class BookingTest extends TestCase
 
         $this->post('api/customer/bookings', [
             'book_date' => $this->startDate,
-            'status' => 1,
+            'status' => Config::get('constants.booking.status_booked'),
             'customer_id' => $customer->id,
             'pitch_id' => $pitch->id,
             'pitch_schedule_id' => $pitchSchedule->id,
@@ -46,7 +47,7 @@ class BookingTest extends TestCase
 
         $this->assertDatabaseHas('bookings', [
             'book_date' => $this->startDate,
-            'status' => 1,
+            'status' => Config::get('constants.booking.status_booked'),
             'customer_id' => $customer->id,
             'pitch_id' => $pitch->id,
             'pitch_schedule_id' => $pitchSchedule->id,
@@ -63,7 +64,7 @@ class BookingTest extends TestCase
 
         $this->put('api/customer/bookings/'. $booking->id, [
             'book_date' => $this->startDate,
-            'status' => 1,
+            'status' => Config::get('constants.booking.status_booked'),
             'customer_id' => $booking->customer->id,
             'pitch_id' => $booking->pitch->id,
             'pitch_schedule_id' => $booking->pitchSchedule->id,
@@ -71,7 +72,7 @@ class BookingTest extends TestCase
 
         $this->assertDatabaseHas('bookings', [
             'book_date' => $this->startDate,
-            'status' => 1,
+            'status' => Config::get('constants.booking.status_booked'),
             'customer_id' => $booking->customer->id,
             'pitch_id' => $booking->pitch->id,
             'pitch_schedule_id' => $booking->pitchSchedule->id,

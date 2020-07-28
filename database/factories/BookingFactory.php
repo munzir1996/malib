@@ -7,12 +7,13 @@ use App\Customer;
 use App\Pitch;
 use App\PitchSchedule;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Config;
 
 $factory->define(Booking::class, function (Faker $faker) {
     $startingDate = $faker->dateTimeThisYear('+1 month');
     return [
         'book_date' => $startingDate,
-        'status' => $faker->numberBetween($min = 1, $max = 30),
+        'status' => Config::get('constants.booking.status_booked'),
         'pitch_id' => function(){
             return factory(Pitch::class)->create()->id;
         },
