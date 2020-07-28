@@ -13,7 +13,7 @@ $factory->define(PitchSchedule::class, function (Faker $faker) {
     return [
         'day' => $faker->numberBetween($min = 1, $max = 30),
         'start' => $startingDate,
-        'end' => $endingDate,
+        'end' => $startingDate,
         'pitch_id' => function(){
             return factory(Pitch::class)->create()->id;
         },
