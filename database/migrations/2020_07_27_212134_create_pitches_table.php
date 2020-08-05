@@ -17,6 +17,8 @@ class CreatePitchesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
+            $table->string('location');
+            $table->text('discription');
             $table->unsignedInteger('price');
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('owner_id');

@@ -11,6 +11,8 @@ $factory->define(Pitch::class, function (Faker $faker) {
     return [
         'name' => $faker->name(),
         'phone' => $faker->phoneNumber(),
+        'location' => $faker->streetAddress(),
+        'discription' => $faker->sentence($nbWords = 30, $variableNbWords = true),
         'price' => $faker->numberBetween($min = 100, $max = 1000),
         'area_id' => function(){
             return factory(Area::class)->create()->id;

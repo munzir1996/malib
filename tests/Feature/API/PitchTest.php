@@ -23,6 +23,8 @@ class PitchTest extends TestCase
         $this->post('api/owner/pitchs', [
             'name' => 'name',
             'phone' => '0114949901',
+            'location' => 'location',
+            'description' => 'description',
             'price' => 200,
             'area_id' => $area->id,
             'owner_id' => $owner->id,
@@ -31,6 +33,8 @@ class PitchTest extends TestCase
         $this->assertDatabaseHas('pitches', [
             'name' => 'name',
             'phone' => '0114949901',
+            'location' => 'location',
+            'description' => 'description',
             'price' => 200,
             'area_id' => $area->id,
             'owner_id' => $owner->id,
@@ -47,6 +51,8 @@ class PitchTest extends TestCase
         $this->put('api/owner/pitchs/'. $pitch->id, [
             'name' => 'name',
             'phone' => '0114949901',
+            'location' => 'location',
+            'description' => 'description',
             'price' => 200,
             'area_id' => $pitch->area->id,
             'owner_id' => $pitch->owner->id,
@@ -55,6 +61,8 @@ class PitchTest extends TestCase
         $this->assertDatabaseHas('pitches', [
             'name' => 'name',
             'phone' => '0114949901',
+            'location' => 'location',
+            'description' => 'description',
             'price' => 200,
             'area_id' => $pitch->area->id,
             'owner_id' => $pitch->owner->id,

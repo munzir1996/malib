@@ -49,4 +49,9 @@ class Customer extends Authenticatable
         return $this->hasMany(Booking::class);
     }
 
+    public function pitchComments()
+    {
+        return $this->hasMany(PitchComment::class);
+    }
+
 }

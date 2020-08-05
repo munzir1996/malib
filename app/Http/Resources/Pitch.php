@@ -17,6 +17,8 @@ class Pitch extends JsonResource
         return [
             'name' => $this->name,
             'phone' => $this->phone,
+            'location' => $this->location,
+            'discription' => $this->discription,
             'price' => $this->price,
             'area' => $this->area->name,
             'owner' => $this->owner->name,

@@ -16,6 +16,7 @@
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.4",
         "laravel/tinker": "^2.0",
+        "spatie/laravel-medialibrary": "^8.0.0",
         "tightenco/ziggy": "^0.9.4",
         "tymon/jwt-auth": "^1.0"
     },

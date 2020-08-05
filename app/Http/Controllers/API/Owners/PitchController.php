@@ -19,7 +19,7 @@ class PitchController extends Controller
      */
     public function index()
     {
-        $pitchs = Pitch::with(['area', 'owner'])->get();
+        $pitchs = Pitch::all();
 
         return new PitchCollection($pitchs);
     }

@@ -3,10 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Pitch extends Model
+class Pitch extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $guarded = [];
+    protected $with = ['area', 'owner'];
 
     public function area()
     {
@@ -26,6 +31,11 @@ class Pitch extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function pitchComments()
+    {
+        return $this->hasMany(PitchComment::class);
     }
 
 }

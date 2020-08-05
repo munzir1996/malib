@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $guarded = [];
+    protected $with = ['pitch', 'customer', 'pitchSchedule'];
 
     public function pitch()
     {
