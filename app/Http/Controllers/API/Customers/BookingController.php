@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\Customers;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BookingStoreRequest;
-use App\Http\Requests\BookingUpdateRequest;
+use App\Http\Requests\API\BookingStoreRequest as APIBookingStoreRequest;
+use App\Http\Requests\API\BookingUpdateRequest as APIBookingUpdateRequest;
 use App\Http\Resources\BookingCollection;
 use App\Http\Resources\Booking as BookingResource;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookingStoreRequest $request)
+    public function store(APIBookingStoreRequest $request)
     {
         $request->validated();
 
@@ -58,7 +58,7 @@ class BookingController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(BookingUpdateRequest $request, Booking $booking)
+    public function update(APIBookingUpdateRequest $request, Booking $booking)
     {
         $request->validated();
 

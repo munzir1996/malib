@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookingUpdateRequest extends FormRequest
+class BookingStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -48,5 +48,4 @@ class BookingUpdateRequest extends FormRequest
             'status.required' => 'الحالة مطلوبة',
         ];
     }
-
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PitchUpdateRequest extends FormRequest
+class PitchStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -48,5 +48,4 @@ class PitchUpdateRequest extends FormRequest
             'owner_id.required' => 'المالك مطلوب',
         ];
     }
-
 }

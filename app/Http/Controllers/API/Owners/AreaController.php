@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API\Owners;
 
 use App\Area;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AreaStoreRequest;
+use App\Http\Requests\API\AreaStoreRequest as APIAreaStoreRequest;
+use App\Http\Requests\API\AreaUpdateRequest as APIAreaUpdateRequest;
 use App\Http\Resources\AreaCollection;
 use App\Http\Resources\Area as AreaResource;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AreaStoreRequest $request)
+    public function store(APIAreaStoreRequest $request)
     {
         $request->validated();
 
@@ -56,8 +57,10 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Area $area)
+    public function update(APIAreaStoreRequest $request, Area $area)
     {
+        $request->validated();
+
         $area->update($request->all());
 
         return response()->json('Area Updates', 201);

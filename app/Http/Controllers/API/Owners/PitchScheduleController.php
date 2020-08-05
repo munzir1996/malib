@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\Owners;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PitchScheduleStoreRequest;
-use App\Http\Requests\PitchScheduleUpdateRequest;
+use App\Http\Requests\API\PitchScheduleStoreRequest as APIPitchScheduleStoreRequest;
+use App\Http\Requests\API\PitchShceduleUpdateRequest as APIPitchScheduleUpdateRequest;
 use App\Http\Resources\PitchScheduleCollection;
 use App\Http\Resources\PitchSchedule as PitchScheduleResource;
 use App\PitchSchedule;
@@ -30,7 +30,7 @@ class PitchScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PitchScheduleStoreRequest $request)
+    public function store(APIPitchScheduleStoreRequest $request)
     {
         $request->validated();
 
@@ -57,7 +57,7 @@ class PitchScheduleController extends Controller
      * @param  \App\PitchSchedule  $pitchSchedule
      * @return \Illuminate\Http\Response
      */
-    public function update(PitchScheduleUpdateRequest $request, PitchSchedule $pitchschedule)
+    public function update(APIPitchScheduleUpdateRequest $request, PitchSchedule $pitchschedule)
     {
         $request->validated();
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OwnerUpdateRequest extends FormRequest
+class OwnerStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class OwnerUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => "required|email|unique:users,email,{$this->id}",
-            'phone' => "required|min:10|unique:users,phone,{$this->id}",
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|min:10|unique:users',
             'address' => 'required',
-            'password' => 'sometimes|confirmed|min:8'
+            'password' => 'required|confirmed|min:8'
         ];
     }
 
@@ -41,17 +41,16 @@ class OwnerUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'الأسم مطلوب',
-            'email.required' => 'أسم المستخدم مطلوب',
-            'email.unique' => 'أسم المستخدم مستخدم بالفعل',
+            'email.required' => 'البريد الألكتروني مطلوب',
+            'email.unique' => 'البريد الألكتروني مستخدم بالفعل',
             'email.email' => 'يجب ان يكون المدخل بريد ألكتروني',
             'phone.required' => 'رقم الهاتف مطلوب',
             'phone.min' => 'يجب أن يكون رقم الهاتف 10 ارقام',
             'phone.unique' => 'رقم الهاتف مستخدم بالفعل',
             'address.required' => 'العنوان مطلوب',
+            'password.required' => 'كلمة السر مطلوبة',
             'password.min' => 'طول الحد الأدني هو 8',
             'password.confirmed' => 'كلمة المرور لا تتطابق مع تأكيد كلمة المرور',
         ];
     }
-
-
 }

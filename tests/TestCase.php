@@ -2,11 +2,14 @@
 
 namespace Tests;
 
+use App\Customer;
+use App\Owner;
 use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Testing\Assert;
 use Illuminate\Testing\TestResponse;
+use Laravel\Sanctum\Sanctum;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -62,4 +65,29 @@ abstract class TestCase extends BaseTestCase
 
         return $user;
     }
+
+    protected function customerApiLogin($customer = null) {
+
+        $customer = $customer ? $customer : factory(Customer::class)->create();
+
+        Sanctum::actingAs(
+            $customer,
+            ['*']
+        );
+
+        return $customer;
+    }
+
+    protected function ownerApiLogin($owner = null) {
+
+        $owner = $owner ? $owner : factory(Owner::class)->create();
+
+        Sanctum::actingAs(
+            $owner,
+            ['*']
+        );
+
+        return $owner;
+    }
+
 }

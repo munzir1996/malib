@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\Owners;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\OwnerStoreRequest;
-use App\Http\Requests\OwnerUpdateRequest;
+use App\Http\Requests\API\OwnerStoreRequest as APIOwnerStoreRequest;
+use App\Http\Requests\API\OwnerUpdateRequest as APIOwnerUpdateRequest;
 use App\Http\Resources\OwnerCollection;
 use App\Http\Resources\Owner as OwnerResource;
 use App\Owner;
@@ -31,7 +31,7 @@ class OwnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OwnerStoreRequest $request)
+    public function store(APIOwnerStoreRequest $request)
     {
         $request->validated();
 
@@ -63,7 +63,7 @@ class OwnerController extends Controller
      * @param  \App\Owner  $owner
      * @return \Illuminate\Http\Response
      */
-    public function update(OwnerUpdateRequest $request, Owner $owner)
+    public function update(APIOwnerUpdateRequest $request, Owner $owner)
     {
         $request->validated();
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PitchStoreRequest extends FormRequest
+class AreaStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,6 @@ class PitchStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'required|min:10',
-            'price' => 'required',
-            'area_id' => 'required',
-            'owner_id' => 'required'
         ];
     }
 
@@ -41,12 +37,6 @@ class PitchStoreRequest extends FormRequest
     {
         return [
             'name.required' => 'الأسم مطلوب',
-            'phone.required' => 'رقم الهاتف مطلوب',
-            'phone.min' => 'يجب أن يكون رقم الهاتف 10 ارقام',
-            'price.required' => 'السعر مطلوب',
-            'area_id.required' => 'المنطقة مطلوبة',
-            'owner_id.required' => 'المالك مطلوب',
         ];
     }
-
 }

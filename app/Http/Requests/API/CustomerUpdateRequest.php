@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerUpdateRequest extends FormRequest
 {
+    /**
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -52,5 +53,4 @@ class CustomerUpdateRequest extends FormRequest
             'password.confirmed' => 'كلمة المرور لا تتطابق مع تأكيد كلمة المرور',
         ];
     }
-
 }

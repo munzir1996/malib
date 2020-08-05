@@ -13,7 +13,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
-    * @test
+    *
     */
     public function can_get_users_list()
     {
@@ -25,7 +25,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function can_create_new_user()
     {
@@ -42,7 +42,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function can_update_user()
     {
@@ -65,7 +65,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function can_delete_user()
     {

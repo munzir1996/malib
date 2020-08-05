@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\Customers;
 
 use App\Customer;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CustomerStoreRequest;
-use App\Http\Requests\CustomerUpdateRequest;
+use App\Http\Requests\API\CustomerStoreRequest as APICustomerStoreRequest;
+use App\Http\Requests\API\CustomerUpdateRequest as APICustomerUpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\CustomerCollection;
 use App\Http\Resources\Customer as CustomerResource;
@@ -31,7 +31,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerStoreRequest $request)
+    public function store(APICustomerStoreRequest $request)
     {
         $request->validated();
 
@@ -64,7 +64,7 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerUpdateRequest $request, Customer $customer)
+    public function update(APICustomerUpdateRequest $request, Customer $customer)
     {
         $request->validated();
 

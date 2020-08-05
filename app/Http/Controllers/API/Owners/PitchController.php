@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\Owners;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PitchStoreRequest;
-use App\Http\Requests\PitchUpdateRequest;
+use App\Http\Requests\API\PitchStoreRequest as APIPitchStoreRequest;
+use App\Http\Requests\API\PitchUpdateRequest as APIPitchUpdateRequest;
 use App\Http\Resources\PitchCollection;
 use App\Http\Resources\Pitch as Pitchresource;
 use App\Pitch;
@@ -30,7 +30,7 @@ class PitchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PitchStoreRequest $request)
+    public function store(APIPitchStoreRequest $request)
     {
         $request->validated();
 
@@ -57,7 +57,7 @@ class PitchController extends Controller
      * @param  \App\Pitch  $pitch
      * @return \Illuminate\Http\Response
      */
-    public function update(PitchUpdateRequest $request, Pitch $pitch)
+    public function update(APIPitchUpdateRequest $request, Pitch $pitch)
     {
         $pitch->update($request->all());
 
