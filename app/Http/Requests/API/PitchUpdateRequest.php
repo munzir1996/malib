@@ -27,7 +27,7 @@ class PitchUpdateRequest extends FormRequest
             'name' => 'required',
             'phone' => 'required|min:10',
             'location' => 'required',
-            'description' => 'required',
+            'discription' => 'required',
             'price' => 'required',
             'area_id' => 'required',
             'owner_id' => 'required'
@@ -45,7 +45,7 @@ class PitchUpdateRequest extends FormRequest
             'name.required' => 'الأسم مطلوب',
             'phone.required' => 'رقم الهاتف مطلوب',
             'location.required' => 'الموقع مطلوب',
-            'description.required' => 'الوصف مطلوب',
+            'discription.required' => 'الوصف مطلوب',
             'phone.min' => 'يجب أن يكون رقم الهاتف 10 ارقام',
             'price.required' => 'السعر مطلوب',
             'area_id.required' => 'المنطقة مطلوبة',

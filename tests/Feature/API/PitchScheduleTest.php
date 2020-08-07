@@ -30,7 +30,7 @@ class PitchScheduleTest extends TestCase
     }
 
     /** @test */
-    public function can_create_pitchschedule()
+    public function owner_can_create_pitchschedule()
     {
         $pitch = factory(Pitch::class)->create();
 
@@ -56,7 +56,7 @@ class PitchScheduleTest extends TestCase
     }
 
     /** @test */
-    public function can_update_pitchschedule()
+    public function owner_can_update_pitchschedule()
     {
         $pitchSchedules = factory(PitchSchedule::class)->create();
 

@@ -100,4 +100,40 @@ class OwnerAuthTest extends TestCase
 
         $this->assertCount(0, $owner->tokens);
     }
+
+    /** @test */
+    public function check_owner_phone_number()
+    {
+        $this->withoutExceptionHandling();
+
+        $owner = factory(Owner::class)->create([
+            'phone' => '0114949901',
+        ]);
+
+        $response = $this->post('/api/owner/check/phonenumber', [
+            'phone' => '0114949901',
+        ]);
+
+        $this->assertEquals(1, $response->json());
+    }
+
+    /** @test */
+    public function owner_can_reset_password()
+    {
+        $this->withoutExceptionHandling();
+
+        $owner = factory(Owner::class)->create([
+            'phone' => '0114949901',
+        ]);
+
+        $response = $this->post('/api/owner/reset/password', [
+            'id' => $owner->id,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertJsonFragment([
+            "message" => "Password reset successfully",
+        ]);
+    }
 }

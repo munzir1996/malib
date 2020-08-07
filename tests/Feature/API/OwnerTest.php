@@ -11,7 +11,7 @@ class OwnerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /**  */
     public function can_create_owner()
     {
         $this->login();
@@ -33,7 +33,7 @@ class OwnerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**  */
     public function can_update_owner()
     {
         $owner = factory(Owner::class)->create();

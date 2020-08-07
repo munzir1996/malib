@@ -100,4 +100,40 @@ class CustomerAuthTest extends TestCase
         $this->assertCount(0, $customer->tokens);
     }
 
+    /** @test */
+    public function check_customer_phone_number()
+    {
+        $this->withoutExceptionHandling();
+
+        $customer = factory(Customer::class)->create([
+            'phone' => '0114949901',
+        ]);
+
+        $response = $this->post('/api/customer/check/phonenumber', [
+            'phone' => '0114949901',
+        ]);
+
+        $this->assertEquals(1, $response->json());
+    }
+
+    /** @test */
+    public function customer_can_reset_password()
+    {
+        $this->withoutExceptionHandling();
+
+        $customer = factory(Customer::class)->create([
+            'phone' => '0114949901',
+        ]);
+
+        $response = $this->post('/api/customer/reset/password', [
+            'id' => $customer->id,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertJsonFragment([
+            "message" => "Password reset successfully",
+        ]);
+    }
+
 }

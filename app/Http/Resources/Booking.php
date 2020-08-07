@@ -18,7 +18,7 @@ class Booking extends JsonResource
             'id' => $this->id,
             'pitch' => $this->pitch->name,
             'customer' => $this->customer->name,
-            'pitch_schedule' => $this->pitchSchedule->name,
+            'pitch_schedule' => new PitchSchedule($this->pitchSchedule),
             'book_date' => $this->book_date,
             'status' => $this->status,
         ];

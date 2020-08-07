@@ -21,7 +21,11 @@ class CustomerAuthController extends Controller
 
         $customer = Customer::create($data);
 
-        return new CustomerResource($customer);
+        return response()->json([
+            'customer' => $customer->only(['id', 'name', 'email', 'phone', 'address']),
+            'token' => $customer->createToken('customer-application')->plainTextToken
+        ]);
+        // return new CustomerResource($customer);
     }
 
     public function updateProfile(APICustomerUpdateRequest $request)
@@ -34,7 +38,7 @@ class CustomerAuthController extends Controller
 
         auth()->user()->update($data);
 
-        return response()->json(auth()->user());
+        return response()->json(auth()->user()->only(['id', 'name', 'email', 'phone', 'address']));
     }
 
     public function login(Request $request)
@@ -63,6 +67,53 @@ class CustomerAuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return response()->json('Logged out');
+        return response()->json('Customer Logged out');
     }
+
+    public function checkPhoneNumber(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+        ]);
+        $customer = Customer::where('phone', $request->phone)->first();
+
+        if (!$customer) {
+            throw ValidationException::withMessages([
+                'phone' => ['بيانات الاعتماد المقدمة غير صحيحة'],
+            ]);
+        }
+
+        return response()->json([
+            'id' => $customer->id,
+        ]);
+
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|confirmed',
+            'id' => 'required'
+        ]);
+
+        $customer = Customer::where('id', $request->id)->first();
+
+        if (!$customer) {
+            throw ValidationException::withMessages([
+                'phone' => ['لا يمكن إعادة تعيين كلمة المرور'],
+            ]);
+        }
+
+        $customer->update([
+            'password' => $request->password,
+        ]);
+
+        return response()->json([
+            'message' => 'Password reset successfully',
+            'token' => $customer->createToken('customer-application')->plainTextToken
+        ]);
+
+    }
+
+
 }

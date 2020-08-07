@@ -15,6 +15,7 @@ class PitchSchedule extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'day' => $this->day,
             'start' => $this->start,
             'end' => $this->end,

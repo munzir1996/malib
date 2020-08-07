@@ -2,8 +2,9 @@
 
 return [
     'booking' => [
-        'status_booked' => 'تم الحجز',
-        'status_confirmed' => 'تم التاكدي',
+        'status_booked' => 'طلب حجز',
+        'status_confirmed' => 'تم الحجز',
+        'status_declined' => 'رفض الحجز',
     ]
 ];
 

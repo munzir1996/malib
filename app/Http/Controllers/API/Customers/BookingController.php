@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\API\Customers;
+namespace App\Http\Controllers\API\CUstomers;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\API\BookingStoreRequest as APIBookingStoreRequest;
 use App\Http\Requests\API\BookingUpdateRequest as APIBookingUpdateRequest;
 use App\Http\Resources\BookingCollection;
 use App\Http\Resources\Booking as BookingResource;
-use Illuminate\Http\Request;
-
 class BookingController extends Controller
 {
     /**
@@ -19,9 +18,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::with(['pitch', 'customer', 'pitchSchedule'])->get();
 
-        return new BookingCollection($bookings);
+        // return response()->json(auth()->user()->bookings);
+        return new BookingCollection(auth()->user()->bookings);
 
     }
 
@@ -77,4 +76,13 @@ class BookingController extends Controller
     {
         //
     }
+
+    public function previous()
+    {
+        $previousBooking = Booking::where('customer_id', auth()->id())->latest('id')->take(5)->get();
+
+        return new BookingCollection($previousBooking);
+
+    }
+
 }

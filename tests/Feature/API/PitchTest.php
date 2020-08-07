@@ -16,15 +16,15 @@ class PitchTest extends TestCase
     /** @test */
     public function can_create_pitch()
     {
-        $owner = factory(Owner::class)->create();
+        // $this->withoutExceptionHandling();
         $area = factory(Area::class)->create();
-        $this->login();
+        $owner = $this->ownerApiLogin();
 
         $this->post('api/owner/pitchs', [
             'name' => 'name',
             'phone' => '0114949901',
             'location' => 'location',
-            'description' => 'description',
+            'discription' => 'discription',
             'price' => 200,
             'area_id' => $area->id,
             'owner_id' => $owner->id,
@@ -34,7 +34,7 @@ class PitchTest extends TestCase
             'name' => 'name',
             'phone' => '0114949901',
             'location' => 'location',
-            'description' => 'description',
+            'discription' => 'discription',
             'price' => 200,
             'area_id' => $area->id,
             'owner_id' => $owner->id,
@@ -45,6 +45,7 @@ class PitchTest extends TestCase
     public function can_update_pitch()
     {
         $pitch = factory(Pitch::class)->create();
+        $owner = $this->ownerApiLogin();
 
         $this->login();
 
@@ -52,20 +53,20 @@ class PitchTest extends TestCase
             'name' => 'name',
             'phone' => '0114949901',
             'location' => 'location',
-            'description' => 'description',
+            'discription' => 'discription',
             'price' => 200,
             'area_id' => $pitch->area->id,
-            'owner_id' => $pitch->owner->id,
+            'owner_id' => $owner->id,
         ]);
 
         $this->assertDatabaseHas('pitches', [
             'name' => 'name',
             'phone' => '0114949901',
             'location' => 'location',
-            'description' => 'description',
+            'discription' => 'discription',
             'price' => 200,
             'area_id' => $pitch->area->id,
-            'owner_id' => $pitch->owner->id,
+            'owner_id' => $owner->id,
         ]);
     }
 

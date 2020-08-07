@@ -25,15 +25,14 @@ class BookingTest extends TestCase
     }
 
     /** @test */
-    public function can_create_booking()
+    public function customer_can_create_booking()
     {
+        $this->withoutExceptionHandling();
 
-        $customer = factory(Customer::class)->create();
         $pitch = factory(Pitch::class)->create();
         $pitchSchedule = factory(PitchSchedule::class)->create();
 
-        $this->withoutExceptionHandling();
-        $this->login();
+        $customer = $this->customerApiLogin();
 
         $this->startDate();
 
@@ -55,17 +54,18 @@ class BookingTest extends TestCase
     }
 
     /** @test */
-    public function can_update_booking()
+    public function customer_can_update_booking()
     {
         $booking = factory(Booking::class)->create();
 
-        $this->login();
+        $customer = $this->customerApiLogin($booking->customer);
+
         $this->startDate();
 
         $this->put('api/customer/bookings/'. $booking->id, [
             'book_date' => $this->startDate,
             'status' => Config::get('constants.booking.status_booked'),
-            'customer_id' => $booking->customer->id,
+            'customer_id' => $customer->id,
             'pitch_id' => $booking->pitch->id,
             'pitch_schedule_id' => $booking->pitchSchedule->id,
         ]);
@@ -73,9 +73,56 @@ class BookingTest extends TestCase
         $this->assertDatabaseHas('bookings', [
             'book_date' => $this->startDate,
             'status' => Config::get('constants.booking.status_booked'),
+            'customer_id' => $customer->id,
+            'pitch_id' => $booking->pitch->id,
+            'pitch_schedule_id' => $booking->pitchSchedule->id,
+        ]);
+    }
+
+    /** @test */
+    public function owner_can_confirm_booking()
+    {
+        $this->withoutExceptionHandling();
+
+        $booking = factory(Booking::class)->create();
+
+        $owner = $this->ownerApiLogin();
+
+        $this->post('api/owner/bookings/confirmed/'. $booking->id);
+
+        $this->assertDatabaseHas('bookings', [
+            'id' => $booking->id,
+            'book_date' => $booking->book_date,
+            'status' => Config::get('constants.booking.status_confirmed'),
             'customer_id' => $booking->customer->id,
             'pitch_id' => $booking->pitch->id,
             'pitch_schedule_id' => $booking->pitchSchedule->id,
         ]);
     }
+
+    /** @test */
+    public function owner_can_declined_booking()
+    {
+        $this->withoutExceptionHandling();
+
+        $booking = factory(Booking::class)->create();
+
+        $owner = $this->ownerApiLogin();
+
+        $this->post('api/owner/bookings/declined/'. $booking->id);
+
+        $this->assertDatabaseHas('bookings', [
+            'id' => $booking->id,
+            'book_date' => $booking->book_date,
+            'status' => Config::get('constants.booking.status_declined'),
+            'customer_id' => $booking->customer->id,
+            'pitch_id' => $booking->pitch->id,
+            'pitch_schedule_id' => $booking->pitchSchedule->id,
+        ]);
+    }
+
+
 }
+
+
+

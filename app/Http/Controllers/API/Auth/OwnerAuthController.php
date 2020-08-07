@@ -21,7 +21,11 @@ class OwnerAuthController extends Controller
 
         $owner = Owner::create($data);
 
-        return new OwnerResource($owner);
+        return response()->json([
+            'owner' => $owner->only(['id', 'name', 'email', 'phone', 'address']),
+            'token' => $owner->createToken('owner-application')->plainTextToken
+        ]);
+        // return new OwnerResource($owner);
     }
 
     public function updateProfile(APIownerUpdateRequest $request)
@@ -34,7 +38,7 @@ class OwnerAuthController extends Controller
 
         auth()->user()->update($data);
 
-        return response()->json(auth()->user());
+        return response()->json(auth()->user()->only(['id', 'name', 'email', 'phone', 'address']));
     }
 
     public function login(Request $request)
@@ -64,6 +68,52 @@ class OwnerAuthController extends Controller
         auth()->user()->tokens()->delete();
 
         return response()->json('Logged out');
+    }
+
+    public function checkPhoneNumber(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+        ]);
+
+        $owner = Owner::where('phone', $request->phone)->first();
+
+        if (!$owner) {
+            throw ValidationException::withMessages([
+                'phone' => ['بيانات الاعتماد المقدمة غير صحيحة'],
+            ]);
+        }
+
+        return response()->json([
+            'id' => $owner->id,
+        ]);
+
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|confirmed',
+            'id' => 'required'
+        ]);
+
+        $owner = Owner::where('id', $request->id)->first();
+
+        if (!$owner) {
+            throw ValidationException::withMessages([
+                'phone' => ['لا يمكن إعادة تعيين كلمة المرور'],
+            ]);
+        }
+
+        $owner->update([
+            'password' => $request->password,
+        ]);
+
+        return response()->json([
+            'message' => 'Password reset successfully',
+            'token' => $owner->createToken('owner-application')->plainTextToken
+        ]);
+
     }
 
 }

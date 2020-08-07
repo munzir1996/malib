@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -12,6 +14,7 @@ class Pitch extends Model implements HasMedia
 
     protected $guarded = [];
     protected $with = ['area', 'owner'];
+
 
     public function area()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\PitchStoreRequest as APIPitchStoreRequest;
 use App\Http\Requests\API\PitchUpdateRequest as APIPitchUpdateRequest;
 use App\Http\Resources\PitchCollection;
+use App\Http\Resources\PitchScheduleCollection;
 use App\Http\Resources\Pitch as Pitchresource;
 use App\Pitch;
 use Illuminate\Http\Request;
@@ -19,9 +20,7 @@ class PitchController extends Controller
      */
     public function index()
     {
-        $pitchs = Pitch::all();
-
-        return new PitchCollection($pitchs);
+        return new PitchCollection(auth()->user()->pitchs);
     }
 
     /**
@@ -74,4 +73,10 @@ class PitchController extends Controller
     {
         //
     }
+
+    public function pitchSchedule(Pitch $pitch)
+    {
+        return new PitchScheduleCollection($pitch->pitchSchedules);
+    }
+
 }

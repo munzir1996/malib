@@ -11,7 +11,7 @@ class AreaTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /**  */
     public function can_create_area()
     {
         $this->login();
@@ -25,7 +25,7 @@ class AreaTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**  */
     public function can_update_area()
     {
         $area = factory(Area::class)->create();

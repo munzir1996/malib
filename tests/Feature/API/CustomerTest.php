@@ -11,7 +11,7 @@ class CustomerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /**  */
     public function can_create_customer()
     {
         $this->login();
@@ -33,7 +33,7 @@ class CustomerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    /**  */
     public function can_update_customer()
     {
         $customer = factory(Customer::class)->create();

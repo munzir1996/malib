@@ -3,26 +3,16 @@
 namespace App\Http\Controllers\API\Owners;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\API\PitchScheduleStoreRequest as APIPitchScheduleStoreRequest;
 use App\Http\Requests\API\PitchShceduleUpdateRequest as APIPitchScheduleUpdateRequest;
 use App\Http\Resources\PitchScheduleCollection;
 use App\Http\Resources\PitchSchedule as PitchScheduleResource;
+use App\Pitch;
 use App\PitchSchedule;
-use Illuminate\Http\Request;
 
 class PitchScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $pitchSchedules = PitchSchedule::with('pitch')->get();
-
-        return new PitchScheduleCollection($pitchSchedules);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -62,16 +52,5 @@ class PitchScheduleController extends Controller
         $request->validated();
 
         $pitchschedule->update($request->all());
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PitchSchedule  $pitchSchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PitchSchedule $pitchschedule)
-    {
-        //
     }
 }

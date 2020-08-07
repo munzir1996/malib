@@ -15,6 +15,7 @@ class PitchComment extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'comment' => $this->comment,
             'customer' => $this->customer->name,
         ];
